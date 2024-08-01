@@ -1,11 +1,28 @@
+
+<div class="container">
 <h1>Posts</h1>
 
-<ul>
-  <% @post.each do |p| %>
-    <li>
-      <%= link_to p.post_images, p %>
-    </li>
-  <% end %>
-</ul>
+  <% @posts.each do |p| %>
+     <% if p.post_images.present? %>
 
-<%= link_to "Post Now", new_post_path %>
+      <div class="border "> <%= link_to main_app.rails_blob_url(p&.post_images&.first&.attachments&.first), target: "_blank" do %>
+        <%= image_tag  main_app.rails_blob_url(p&.post_images&.first&.attachments&.first), class: 'img-thumbnail' %>
+     </div>
+       <p><%= p.caption %> </p>
+        <% end %>
+        <% end %>
+  <% end %>
+  
+
+   <% if user_signed_in? %>
+   <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } , class:"btn btn-dark" %>   
+   <% else %>
+   <%= link_to "Sign up" , user_session_path , class:"btn btn-dark" %>
+   <% end %>
+    
+
+  <%= link_to "Create New post",  new_post_path , class:"btn btn-dark" %>
+</div>
+
+
+

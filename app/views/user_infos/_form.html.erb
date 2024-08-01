@@ -1,0 +1,22 @@
+<%= form_with(model: user_info) do |form| %>
+  <% if user_info.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user_info.errors.count, "error") %> prohibited this user_info from being saved:</h2>
+
+      <ul>
+        <% user_info.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :bio, style: "display: block" %>
+    <%= form.text_field :bio %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
