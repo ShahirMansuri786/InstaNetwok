@@ -1,0 +1,33 @@
+<!-- app/views/posts/new.html.erb -->
+
+<div  class="container , bg-body-secondary">
+<%= form_with(model: @post, local: true, html: { multipart: true }) do |form| %>
+
+  <div class="form-group , mt-5">
+    <%= form.label :post_images, 'Upload Image' %>
+   <div class="mt-3"> <%= form.file_field :post_images, class: 'form-control' %></div>
+  </div>
+  
+
+  <div class="form-group , mt-3">
+    <%= form.label :caption, 'Caption' %>
+   <div class="mt-3"><%= form.text_area :caption, class: 'form-control', rows: 3 %></div>
+  </div>
+
+  <div class="form-group mt-4 , text-center">
+    <%= form.submit 'Create Post', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<!-- Display error messages -->
+<% if @post.errors.any? %>
+  <div class="alert alert-danger">
+    <h4><%= pluralize(@post.errors.count, "error") %> prohibited this image post from being saved:</h4>
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+</div>

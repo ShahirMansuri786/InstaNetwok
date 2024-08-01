@@ -1,0 +1,11 @@
+<h1>Posts</h1>
+
+<ul>
+  <% @post.each do |p| %>
+    <li>
+      <%= link_to p.post_images, p %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Post Now", new_post_path %>

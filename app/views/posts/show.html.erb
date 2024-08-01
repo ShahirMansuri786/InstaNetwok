@@ -1,0 +1,11 @@
+<!-- app/views/image_posts/show.html.erb -->
+<p>
+  <strong>Caption:</strong>
+  <%= @post.caption %>
+</p>
+
+<div class="image-container">
+  <%= image_tag @post.post_images if @post.post_images.attached? %>
+</div>
+
+<%= link_to 'Back', posts_path, class: 'btn btn-secondary' %>
