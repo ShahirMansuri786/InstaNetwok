@@ -1,7 +1,9 @@
 <!-- app/views/image_posts/show.html.erb -->
 <div  class="container mt-5">
+<div>
 <% if user_signed_in? %>
 <%= current_user %>
+</div>
 <% end %> 
 <% if @post.post_images.present? && @post.id.present? %>
 <%= image_tag (@post.post_images.first.attachments.first  if @post.post_images.attached?) , style:" max-width: 70% ;" %>
