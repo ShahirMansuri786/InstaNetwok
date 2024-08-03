@@ -1,0 +1,28 @@
+<!-- app/views/image_posts/show.html.erb -->
+<div  class="container mt-5">
+<div>
+<% if user_signed_in? %>
+<%= current_user %>
+</div>
+<% end %> 
+<% if @post.post_images.present? && @post.id.present? %>
+<%= image_tag (@post.post_images.first.attachments.first  if @post.post_images.attached?) , style:" max-width: 70% ;" %>
+
+<div class="mt-3">
+<p><%= @post.caption %></p>
+<div>
+
+<% else %>
+<p>There is no post available</p>
+<% end %>
+
+<%= link_to 'Delete Post', post_path(@post), data: {  
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"} ,  class: 'btn btn-secondary'  %>
+
+<%= link_to 'see all post', posts_path, class: 'btn btn-secondary' %>
+</div>
+
+</div>
+</div>
+

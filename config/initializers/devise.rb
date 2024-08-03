@@ -306,6 +306,7 @@ Devise.setup do |config|
   config.responder.redirect_status = :see_other
 
   config.navigational_formats = ['*/*', :html, :turbo_stream]
+  # config.case_insensitive_keys = [:name, :username]
 
   # ==> Configuration for :registerable
 
