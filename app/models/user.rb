@@ -9,5 +9,5 @@ class User < ApplicationRecord
          
          has_many:posts
          has_one:user_info
-
+         has_many :liks ,through: :posts
 end
