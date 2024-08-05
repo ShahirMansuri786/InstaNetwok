@@ -1,17 +1,5 @@
-
-<div style="margin-left:76.5%">
-   <% if user_signed_in? %>
-   <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } , class:"btn btn-dark" %>   
-   <% else %>
-   <%= link_to "Sign up" , user_session_path , class:"btn btn-dark" %>
-   <% end %>
-   <%= link_to "New post",  new_post_path , class:"btn btn-dark" %>
-   </div>
-
-
-
 <% @posts.each do |p| %>
-    <div class="card mb-3">
+    <div class="card mb-3 bg-info-subtle">
     
     <% if p.post_images.present? %>
     <div>
@@ -25,18 +13,15 @@
 
        <!-- like button -->
         <%= form_with(url: post_likes_path(p)) do %> 
-       <button class="btn btn-dark"><%= Like %></button> 
-        <button class="btn btn-dark"><%= Post.find(p.id).likes.count %></button>
-          <img src="https://cdn-icons-png.flaticon.com/128/134/134808.png", style="max-width:3%; margin-left:10px " >
+       <button class="btn btn-outline-success"><%= Like %></button> 
+        <button class="btn btn-outline-success" ><%= Post.find(p.id).likes.count %></button>
+        <img src="https://cdn-icons-png.flaticon.com/128/134/134808.png", style="max-width:3%; margin-left:10px ">
        <% end %>
 
-       <%= form_with(url: post_comments_path(p)) do |form|%> 
-         <%= form.text_area :comment_text, placeholder: "Enter your comment here"%>
-         <%= form.submit "create comment", class: "btn btn-dark mt-2" %>
-       <% end %>
        
        
-       <%= link_to "Create Commment" , new_post_comment_path(p) %>
+       
+      <div class="btn btn-outline-success"><%= link_to "Create Commment" , new_post_comment_path(p) %></div>
       
        </div>
        <% end %>
