@@ -1,44 +1,9 @@
+<div class="container col-8">
+<div class="row">
 
-<div class="container">
-<h1 style="margin-left:15%">InstaNetwork</h1>
-<div style="margin-left:66.5%">
-   <% if user_signed_in? %>
-   <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } , class:"btn btn-dark" %>   
-   <% else %>
-   <%= link_to "Sign up" , user_session_path , class:"btn btn-dark" %>
-   <% end %>
-   <%= link_to "New post",  new_post_path , class:"btn btn-dark" %>
-   </div>
-  
-   <% @posts.each do |p| %>
-    
-     <% if p.post_images.present? %>
-     <div style="margin-left:15%">
-      <p><%= User.find_by(id:(p.user_id)) %> </p>
+<%= render "postcard" %>
 
-       <%= link_to main_app.rails_blob_url(p&.post_images&.first&.attachments&.first), target: "_blank" do %>
-        <%= image_tag  main_app.rails_blob_url(p&.post_images&.first&.attachments&.first), style:"max-width: 80%" %>
-        
-        <% end %>
-        <p><%= p.caption %> </p>
-
-        <!-- like button -->
-         <%= form_with(url: post_likes_path(p)) do %> 
-        <button class="btn btn-dark"><%= Like %></button> 
-         <button class="btn btn-dark"><%= Post.find(p.id).likes.count %></button>
-           <img src="https://cdn-icons-png.flaticon.com/128/134/134808.png", style="max-width:3%; margin-left:10px " >
-        <% end %>
-       
-        
-
-        </div>
-        <% end %>
-        
-  <% end %>
-  
-  </div>
+</div>
+</div>
 
 
-
-<!-- submit_tag "Like", class: 'like-button', id: "like-button-#{p.id}" -->
-<!-- hidden_field_tag :post_id, p.id  -->

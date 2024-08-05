@@ -1,16 +1,13 @@
 class CommentsController < ApplicationController
+        before_action :find_post
 
-    class PostsController < ApplicationController
-
-  
         def index
           @comments = Comment.all
         end
-        
-      
       
         def new
-          @comment = Comment.new
+          @comment = @post.comments.new()
+          
         end
       
         def show
@@ -19,10 +16,11 @@ class CommentsController < ApplicationController
       
       
         def create
+            
           if user_signed_in?
-            @comment = @post.comments.new
+            @comment = @post.comments.new(comment_params)
       
-          if @post.save!
+          if @comment.save!
             redirect_to @comment
           else
             render :new, notice: "Image succesfully created"
@@ -48,10 +46,16 @@ class CommentsController < ApplicationController
         private
       
         def comment_params
-          params.require(:comment).permit(:comment_text , :post_id)
+          params.require(:comment).permit(:post_id, :comment_text)
+        end
+
+        
+        def find_post
+            byebug
+            @post = Post.find(params[:post_id] )
+            byebug
         end
       
-      end
       
 
 
