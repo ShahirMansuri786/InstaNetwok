@@ -1,0 +1,11 @@
+
+<body>
+
+  </div>
+    <%= form_with model: @comment do |form| %>
+        <%= form.text_area :comment_text, placeholder: "Enter your comment here"%>
+        <%= form.submit "create comment", class: "btn btn-primary mt-2" %>
+      <% end %>
+  </div>
+
+</body>
