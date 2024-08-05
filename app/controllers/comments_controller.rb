@@ -51,9 +51,9 @@ class CommentsController < ApplicationController
 
         
         def find_post
-            byebug
+            
             @post = Post.find(params[:post_id] )
-            byebug
+            
         end
       
       
