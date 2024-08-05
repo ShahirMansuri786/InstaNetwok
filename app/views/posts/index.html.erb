@@ -21,14 +21,24 @@
         
         <% end %>
         <p><%= p.caption %> </p>
-        <img src="https://www.svgrepo.com/show/356859/like.svg", style="max-width:3%" >
-        <img src="https://cdn-icons-png.flaticon.com/128/134/134808.png", style="max-width:3%; margin-left:10px " >
+
+        <!-- like button -->
+         <%= form_with(url: post_likes_path(p)) do %> 
+        <button class="btn btn-dark"><%= Like %></button> 
+         <button class="btn btn-dark"><%= Post.find(p.id).likes.count %></button>
+           <img src="https://cdn-icons-png.flaticon.com/128/134/134808.png", style="max-width:3%; margin-left:10px " >
+        <% end %>
+       
+        
+
         </div>
         <% end %>
         
   <% end %>
+  
   </div>
-  </div>
 
 
 
+<!-- submit_tag "Like", class: 'like-button', id: "like-button-#{p.id}" -->
+<!-- hidden_field_tag :post_id, p.id  -->
