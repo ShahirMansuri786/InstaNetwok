@@ -1,6 +1,9 @@
 <!-- app/views/posts/new.html.erb -->
 
 <div  class="container , bg-body-secondary">
+
+<div style="margin-left:95.5%"><%= link_to 'Back', posts_path, class: 'btn btn-dark' %></div>
+
 <%= form_with(model: @post, local: true, html: { multipart: true }) do |form| %>
 
   <div class="form-group , mt-5">
@@ -15,7 +18,7 @@
   </div>
 
   <div class="form-group mt-4 , text-center">
-    <%= form.submit 'Create Post', class: 'btn btn-primary' %>
+    <%= form.submit 'Create Post', class: 'btn btn-dark' %>
   </div>
 <% end %>
 
