@@ -1,31 +1,32 @@
 class UserInfosController < ApplicationController
   before_action :set_user_info, only: %i[ show edit update destroy ]
 
-  # GET /user_infos 
+ 
   def index
     @user_infos = UserInfo.all
   end
 
-  # GET /user_infos/1 
+  
   def show
     @user_info = UserInfo.find(params[:id])
   end
 
-  # GET /user_infos/new
   def new
+    if user_signed_in?
     @user_info = UserInfo.new
+  else
+    redirect_to user_session_path
+  end
   end
 
-  # GET /user_infos/1/edit
   def edit
+    @user_info = UserInfo.find(params[:id])
   end
 
-  # POST /user_infos 
 
   
   def create
     if user_signed_in?
-     
       #has_one
       @user_info = current_user.create_user_info(user_info_params)
     
@@ -39,7 +40,7 @@ class UserInfosController < ApplicationController
    end 
     end
   
-  # PATCH/PUT /user_infos/1
+
   
   def update
       if @user_info.update(user_info_params)
@@ -50,7 +51,7 @@ class UserInfosController < ApplicationController
     end
 
   
-  # DELETE /user_infos/1 
+ 
   def destroy
   if user_signed_in?
     @user_info = UserInfo.find(params[:id])
@@ -63,12 +64,12 @@ class UserInfosController < ApplicationController
 
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+  
   def set_user_info
     @user_info = UserInfo.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
+  
   def user_info_params
     params.require(:user_info).permit(:bio , :user_id)
   end
