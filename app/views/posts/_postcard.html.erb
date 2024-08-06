@@ -17,8 +17,11 @@
        <button class="btn btn-outline-success"><%= Like %></button> 
         <button class="btn btn-outline-success" ><%= Post.find(p.id).likes.count %></button>
        <% end %>
-        <%= link_to "Create Commment" , new_post_comment_path(p) , class:"btn btn-outline-success , ms-1" %>  
-       </div>
+        <div><%= link_to "Create Commment" , new_post_comment_path(p) , class:"btn btn-outline-success , ms-1" %></div> 
+        <div > <%=render "posts/allcomment" , post: p %> </div>
+        
+        </div>
+       
 
 
       
