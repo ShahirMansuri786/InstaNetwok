@@ -1,0 +1,34 @@
+<html>
+  <head>
+  <style>
+  .card:hover{
+    box-shadow:10px 10px 10px 10px grey;
+    border-radius:10px;
+  }
+  </style>
+  
+  </head>
+
+  <body>
+
+  <div class="card" style="width:400px; margin-top:200px ; margin-left:400px">
+ 
+  <div class="card-body">
+    <h5 class="card-title"><%= current_user.name%></h5>
+  
+     <%= form_with(model: @user_info) do |form| %>
+   <div><%= form.label :bio, "Write your bio here:" %></div>
+   
+   <%= form.text_field :bio %>
+  <button class="btn btn-outline-success" > Done </button>
+  </div>
+<% end %>
+
+
+
+  </div>
+</div>
+
+
+  </body>
+</html>
