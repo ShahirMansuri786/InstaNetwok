@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html >
+  <head>
+  
+  </head>
+
+  <body>
+
+  <div class="card" , style="height:700px ; width:215px ; background-color:#ede4e4;">
+
+ <div style="text-align:center ; margin-top:30px">
+  <div>
+  <% if UserProfile.find_by(user_id:current_user.id).present? %> 
+  <% if (UserProfile.find_by(user_id:current_user).profile_image.present?) %>
+  <%= image_tag (UserProfile.find_by(user_id:current_user).profile_image&.attachments&.first  if UserProfile.find_by(user_id:current_user).profile_image.attached? ) , style:"width:100px; height:100px ; border-radius:180px " %> 
+  
+  <% end %>
+  <% else %>
+  <%= link_to "Upload profile" , new_user_profile_path %>
+  <% end %>
+  </div>
+  
+  <div class="mt-3">
+  <p> name : <%= current_user.name%> <%= link_to "edit" , user_edit_path(current_user.id) ,  class:"btn btn-outline-success" , style:"width:60px ; height:28px"  %> </p>
+  <p> user_name : <%= current_user.user_name%></p>
+  <% if UserInfo.find_by(user_id:current_user.id).present? %>
+  <p> bio : <%= current_user.user_info.bio %> <%= link_to "edit" , edit_user_info_path(current_user.user_info.id) , class:"btn btn-outline-success" , style:"width:60px ; height:28px" %></p>
+  <% else %>
+  <%= link_to "create_bio" , new_user_info_path %>
+  <% end %>
+  </div>
+</div>  
+  
+</div>
+  
+
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

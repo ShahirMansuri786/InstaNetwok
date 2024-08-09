@@ -44,7 +44,7 @@ class UserInfosController < ApplicationController
   
   def update
       if @user_info.update(user_info_params)
-        redirect_to @user_info
+        redirect_back(fallback_location: root_path )
       else
         render :edit, status: :unprocessable_entity 
       end

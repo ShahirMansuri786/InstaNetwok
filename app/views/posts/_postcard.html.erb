@@ -1,33 +1,27 @@
 <% @posts.each do |p| %>
-    <div class="card mb-3 bg-info-subtle" , style="border-radius:20px">
-    
+  <div class="card mb-3 bg-info-subtle" , style="border-radius:20px; width:850px ">
+  
     <% if p.post_images.present? %>
-    <div>
-     <p><%= User.find_by(id:(p.user_id)).name %> </p>
+      <div>
+        <h5><%= User.find_by(id: p.user_id).name %></h5>
+          <%= image_tag main_app.rails_blob_url(p&.post_images&.first&.attachments&.first), style: "max-width: 100%; border-radius:10px" %>
+        <p><%= p.caption %></p>
 
-      <%= link_to main_app.rails_blob_url(p&.post_images&.first&.attachments&.first), target: "_blank" do %>
-       <%= image_tag  main_app.rails_blob_url(p&.post_images&.first&.attachments&.first), style:"max-width: 100% ; border-radius:10px" %>
-       
-       <% end %>
-       <p><%= p.caption %> </p>
-
-       <!-- like button -->
-       <div style="display:inline ; display:flex ; margin-bottom:15px">
-        <%= form_with(url: post_likes_path(p)) do %> 
-       <button class="btn btn-outline-success"><%= Like %></button> 
-        <button class="btn btn-outline-success" ><%= Post.find(p.id).likes.count %></button>
-       <% end %>
-        <div><%= link_to "Create Commment" , new_post_comment_path(p) , class:"btn btn-outline-success , ms-1" %></div> 
-        <div > <%=render "posts/allcomment" , post: p %> </div>
-        
+        <!-- like button -->
+        <div style="display:inline; display:flex; margin-bottom:15px">
+          <%= form_with(url: post_likes_path(p)) do %> 
+            <button class="btn btn-outline-success"><%= Like %></button> 
+            <button class="btn btn-outline-success"><%= Post.find(p.id).likes.count %></button>
+          <% end %>
+          <div>
+            <%= link_to "Create Comment", new_post_comment_path(p), class: "btn btn-outline-success ms-1" %>
+          </div> 
+          <div>
+            <%= render "posts/allcomment", post: p %>
+          </div>
         </div>
-       
+      </div>
+    <% end %>
+  </div>
+<% end %>
 
-
-      
-       </div>
-       <% end %>
-       </div>
-
-       <% end %>
-</div>
