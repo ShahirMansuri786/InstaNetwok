@@ -23,9 +23,15 @@ class UsersController < ApplicationController
     end
   end
 
-  # def user_followed
-  #   @user_followed = Relationship.where(follower_id:current_user.id)
-  # end
+  def user_followed
+    @user_relation = Relationship.where(followed_id:current_user.id).present?
+    @user_followed = Relationship.where(followed_id:current_user.id)
+  end
+
+  def user_follower
+    @user_relation = Relationship.where(follower_id:current_user.id).present?
+    @user_follower = Relationship.where(follower_id:current_user.id)
+  end
 
   def user_search
     @user_present = User.find_by(name:params[:name]).present?

@@ -1,0 +1,19 @@
+
+<%len = @user_followed.length %>
+
+<% if @user_relation %>
+<div class="card" style="height: 500px; width: 700px; background-color: #ede4e4; position:relative; left:290px; top:100px;">
+<div>        
+<% for i in 0...len do %>
+<table style="width: 100%; border-collapse: collapse;">
+  <tr>
+    <td style="padding: 10px; border: 1px solid #ccc; text-align: left;">Name:</td>
+    <td style="padding: 10px; border: 1px solid #ccc; text-align: right"><%= User.find(@user_followed[i].follower_id).name %></td>
+  </tr>
+</table>
+<% end %>
+<td style="padding: 10px; border: 1px solid #ccc;"><%= link_to 'Back', posts_path, class:"btn btn-outline-success" %></td>
+
+</div>
+</div>
+<% end %>
