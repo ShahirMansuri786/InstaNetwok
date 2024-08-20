@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get :user_search
+      get :user_followed
+      get :user_follower
     end
    resources :relationships , only: [:create ]
   end
@@ -22,7 +24,6 @@ Rails.application.routes.draw do
   get "users/:id/user_edit" , to: "users#user_edit" , as: "user_edit" 
   post  "users/:id/user_update" , to: "users#user_update" , as: "user_update"
   
-  get "users/user_followed" , to: "users#user_followed" , as: "user_followed" 
+  
 
-  # get "users/user_search" , to: "users#user_search"
 end
