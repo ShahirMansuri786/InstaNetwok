@@ -3,8 +3,14 @@
   
     <% if p.post_images.present? %>
       <div>
-        <h5><%= User.find_by(id: p.user_id).name %></h5>
-          <%= image_tag main_app.rails_blob_url(p&.post_images&.first&.attachments&.first), style: "max-width: 100%; border-radius:10px" %>
+        
+      
+        <h5 style="float:left ; margin:10px"><%= User.find_by(id: p.user_id).name %></h5>
+        <%= button_to "Follow", user_relationships_path(User.find_by(id: p.user_id)), method: :post, class: "btn btn-danger", form: { data: { turbo: false } } unless User.find_by(id: p.user_id).followers.find_by(follower: current_user).present? %>
+        <%= button_to "unfollow" , relationship_path(User.find_by(id: p.user_id).followers.find_by(follower: current_user).id) , method: :delete , class:"btn btn-danger" if User.find_by(id: p.user_id).followers.find_by(follower: current_user).present? %>
+         
+        
+        <%= image_tag main_app.rails_blob_url(p&.post_images&.first&.attachments&.first), style: "max-width: 100%; border-radius:10px" %>
         <p><%= p.caption %></p>
 
         <!-- like button -->
