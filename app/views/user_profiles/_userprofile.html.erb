@@ -29,6 +29,9 @@
   <%= link_to "create_bio" , new_user_info_path %>
   <% end %>
   </div>
+
+  <p>Followers: <%= current_user.followers.count %> <%= link_to "see" , user_followed_path , class:"btn btn-outline-success" , style:"width:60px ; height:28px" %></p>
+  <p>Followed: <%= current_user.following.count %>  <%= link_to "see" , user_followed_path , class:"btn btn-outline-success" , style:"width:60px ; height:28px" %></p>
 </div>  
   
 </div>

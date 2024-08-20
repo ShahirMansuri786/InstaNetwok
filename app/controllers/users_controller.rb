@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
+    # @relation = @user.followers.find_by(follower: current_user)
   end
 
   def user_update
@@ -21,6 +22,10 @@ class UsersController < ApplicationController
       render :user_edit, status: :unprocessable_entity 
     end
   end
+
+  # def user_followed
+  #   @user_followed = Relationship.where(follower_id:current_user.id)
+  # end
 
   private
   def user_params
