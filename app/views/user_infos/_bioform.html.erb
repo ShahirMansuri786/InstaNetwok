@@ -1,40 +1,31 @@
 <html>
   <head>
-  <style>
-  .card:hover{
-    box-shadow:10px 10px 10px 10px grey;
-    border-radius:10px;
-  }
-  .edit_bio{
-   position: relative;
-   top:200px;
-   
-  }
-  </style>
-  
+    <style>
+      .card:hover{
+        box-shadow:10px 10px 10px 10px grey;
+        border-radius:10px;}
+      .edit_bio{
+        position: relative;
+        top:200px;}
+    </style>
   </head>
-
-  <body>
-
+<body>
   <div class="edit_bio">
-  <div class="card" style="width:400px;  margin-left:400px">
-  <div style="margin-left:85%"><%= link_to 'Back', posts_path, class:"btn btn-outline-success" %></div>
-
-  <div class="card-body">
-    <h5 class="card-title"><%= current_user.name%></h5>
-  
-     <%= form_with(model: @user_info) do |form| %>
-   <div><%= form.label :bio, "Write your bio here:" %></div>
-   
-   <%= form.text_field :bio %>
-  <button class="btn btn-outline-success" > Done </button>
+    <div class="card" style="width:400px;  margin-left:400px">
+      <div style="margin-left:85%">
+        <%= link_to 'Back', posts_path, class:"btn btn-outline-success" %>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= current_user.name%></h5>
+        <%= form_with(model: @user_info) do |form| %>
+        <div>
+          <%= form.label :bio, "Write your bio here:" %>
+        </div>
+          <%= form.text_field :bio %>
+          <button class="btn btn-outline-success" > Done </button>
+      </div>
+        <% end %>
+    </div>
   </div>
-<% end %>
-
- </div>
- </div>
-
-
-
-  </body>
+</body>
 </html>
