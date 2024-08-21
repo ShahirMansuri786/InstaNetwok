@@ -36,7 +36,6 @@ class UsersController < ApplicationController
   def user_search
     @user_present = User.find_by(name:params[:name]).present?
     @user_search = User.find_by(name: params[:name])
- 
   end
 
   private

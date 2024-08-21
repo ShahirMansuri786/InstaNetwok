@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       get :user_followed
       get :user_follower
     end
-   resources :relationships , only: [:create ]
+    resources :relationships , only: [:create ]
   end
 
   resources :relationships , only: [:destroy]
