@@ -3,35 +3,34 @@
 <html >
   <head>
     <style>
-    .edit_details{
-      position: relative;
-      top:150px;
-      
-    }
+      .edit_details{
+        position: relative;
+        top:150px;}
     </style>
   </head>
-  <body>
-
+<body>
   <div class="edit_details">
-  <div class="card" style="width:400px;  margin-left:400px">
-  <div style="margin-left:85%"><%= link_to 'Back', posts_path, class:"btn btn-outline-success" %></div>
-
-  <div class="card-body">
-    <h5 class="card-title"><%= current_user.name%></h5>
-  
-    <%= form_with(url: user_update_path(@user.id) , method: :post ) do |form| %>
-   <div><%= form.label :name, "Edit your name:" %></div>
-        <%= form.text_field :name %>
-   <div><%= form.label :user_name, "Edit your user_name:" %></div>
-        <%= form.text_field :user_name %>
-        <br>
-  <button class="btn btn-outline-success" >Done</button>
+    <div class="card" style="width:400px;  margin-left:400px">
+      <div style="margin-left:85%">
+        <%= link_to 'Back', posts_path, class:"btn btn-outline-success" %>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= current_user.name%></h5>
+        <%= form_with(url: user_update_path(@user.id) , method: :post ) do |form| %>
+        <div>
+          <%= form.label :name, "Edit your name:" %>
+        </div>
+          <%= form.text_field :name %>
+        <div>
+          <%= form.label :user_name, "Edit your user_name:" %> 
+        </div>
+          <%= form.text_field :user_name %>
+          <br>
+          <button class="btn btn-outline-success" >Done</button>
+      </div>
+        <% end %>
+    </div>
   </div>
-<% end %>
-
- </div>
- </div>
-
 </body>
 </html>
 

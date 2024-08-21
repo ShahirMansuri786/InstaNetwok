@@ -1,77 +1,72 @@
 <!DOCTYPE html>
 <html >
   <head>
-
-  <style>
-  .user_pro{
-    position:relative;
-    left:300px;
-    top:100px
-  }
-  .card:hover{
-   box-shadow: 10px 10px 20px 10px grey ;
-   border-radius:10px;
-  </style>
-  
+    <style>
+      .user_pro{
+      position:relative;
+      left:300px;
+      top:100px}
+      .card:hover{
+        box-shadow: 10px 10px 20px 10px grey ;
+        border-radius:10px;
+    </style>
   </head>
 
-<body>
-  
-<div class="user_pro">
-  <div class="card" style="height: 500px; width: 700px; background-color: #ede4e4;">
-    <% if @user_present %>
-      <div style="text-align: center; margin-top: 30px;">
-        <% if UserProfile.find_by(user_id: @user_search).present? %>
+<body> 
+  <div class="user_pro">
+    <div class="card" style="height: 500px; width: 700px; background-color: #ede4e4;">
+      <% if @user_present %>
+        <div style="text-align: center; margin-top: 30px;">
+          <% if UserProfile.find_by(user_id: @user_search).present? %>
           <% if UserProfile.find_by(user_id: @user_search.id).profile_image.present? %>
-            <%= image_tag(UserProfile.find_by(user_id: @user_search.id).profile_image&.attachments&.first, style: "width: 100px; height: 100px; border-radius: 180px;") %>
+          <%= image_tag(UserProfile.find_by(user_id: @user_search.id).profile_image&.attachments&.first, style: "width: 100px; height: 100px; border-radius: 180px;") %>
           <% end %>
-        <% end %>
-      </div>
+      <% end %>
+    </div>
 
-      <div style="margin: 20px;">
-        <table style="width: 100%; border-collapse: collapse;">
-          <tr>
-            <td style="padding: 10px; border: 1px solid #ccc; text-align: right;">Name:</td>
-            <td style="padding: 10px; border: 1px solid #ccc;"><%= @user_search.name %></td>
-          </tr>
-          <tr>
-            <td style="padding: 10px; border: 1px solid #ccc; text-align: right;">Username:</td>
-            <td style="padding: 10px; border: 1px solid #ccc;"><%= @user_search.user_name %></td>
-          </tr>
-          <% if UserInfo.find_by(user_id: @user_search.id).present? %>
-            <tr>
-              <td style="padding: 10px; border: 1px solid #ccc; text-align: right;">Bio:</td>
-              <td style="padding: 10px; border: 1px solid #ccc;"><%= @user_search.user_info.bio %></td>
-            </tr>
-          <% end %>
-          <tr>
-            <td style="padding: 10px; border: 1px solid #ccc; text-align: right;">Followers:</td>
-            <td style="padding: 10px; border: 1px solid #ccc;"><%= @user_search.followers.count %></td>
-          </tr>
-          <tr>
-            <td style="padding: 10px; border: 1px solid #ccc; text-align: right;">Following:</td>
-            <td style="padding: 10px; border: 1px solid #ccc;"><%= @user_search.following.count %></td>
-          </tr>
-          <tr>
-           <td style="padding: 10px; border: 1px solid #ccc; text-align: right;"><%= button_to "Follow", user_relationships_path(User.find_by(id: @user_search.id)), method: :post, class: "btn btn-danger", form: { data: { turbo: false } } unless User.find_by(id:@user_search.id).followers.find_by(follower: current_user).present? %></td>
-           <td style="padding: 10px; border: 1px solid #ccc;"><%= button_to "unfollow" , relationship_path(User.find_by(id: @user_search.id).followers.find_by(follower: current_user).id) , method: :delete , class:"btn btn-danger" if User.find_by(id:@user_search.id).followers.find_by(follower: current_user).present? %></td>
-          </tr> 
-          <tr>
-          <td style="padding: 10px; border: 1px solid #ccc;"><%= link_to 'Back', posts_path, class:"btn btn-outline-success" %></td>
-          </tr>
-
-        </table>
-      </div>
-    <% else %>
-       <table>
+    <div style="margin: 20px;">
+      <table style="width: 100%; border-collapse: collapse;">
         <tr>
-            <td style="padding: 10px; border: 1px solid #ccc; text-align: center;">Please Enter correct name </td>
-            <td style="padding: 10px; border: 1px solid #ccc;"><%= link_to 'Back', posts_path, class:"btn btn-outline-success" %></td>
-        
+          <td style="padding: 10px; border: 1px solid #ccc; text-align: right;">Name:</td>
+          <td style="padding: 10px; border: 1px solid #ccc;"><%= @user_search.name %></td>
         </tr>
-       </table>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ccc; text-align: right;">Username:</td>
+          <td style="padding: 10px; border: 1px solid #ccc;"><%= @user_search.user_name %></td>
+        </tr>
+          <% if UserInfo.find_by(user_id: @user_search.id).present? %>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ccc; text-align: right;">Bio:</td>
+          <td style="padding: 10px; border: 1px solid #ccc;"><%= @user_search.user_info.bio %></td>
+        </tr>
+          <% end %>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ccc; text-align: right;">Followers:</td>
+          <td style="padding: 10px; border: 1px solid #ccc;"><%= @user_search.followers.count %></td>
+        </tr>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ccc; text-align: right;">Following:</td>
+          <td style="padding: 10px; border: 1px solid #ccc;"><%= @user_search.following.count %></td>
+        </tr>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ccc; text-align: right;"><%= button_to "Follow", user_relationships_path(User.find_by(id: @user_search.id)), method: :post, class: "btn btn-danger", form: { data: { turbo: false } } unless User.find_by(id:@user_search.id).followers.find_by(follower: current_user).present? %></td>
+          <td style="padding: 10px; border: 1px solid #ccc;"><%= button_to "unfollow" , relationship_path(User.find_by(id: @user_search.id).followers.find_by(follower: current_user).id) , method: :delete , class:"btn btn-danger" if User.find_by(id:@user_search.id).followers.find_by(follower: current_user).present? %></td>
+        </tr> 
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ccc;"><%= link_to 'Back', posts_path, class:"btn btn-outline-success" %></td>
+        </tr>
+
+      </table>
+    </div>
+    <% else %>
+      <table>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ccc; text-align: center;">Please Enter correct name </td>
+          <td style="padding: 10px; border: 1px solid #ccc;"><%= link_to 'Back', posts_path, class:"btn btn-outline-success" %></td>
+        </tr>
+      </table>
     <% end %>
+    </div>
   </div>
-</div>
 </body>
 </html>       
