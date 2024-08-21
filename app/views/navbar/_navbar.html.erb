@@ -1,5 +1,5 @@
 <div class="container fixed-top " style="max-width:68.4%">
-<nav class="navbar navbar-expand-lg  bg-body-tertiary ">
+  <nav class="navbar navbar-expand-lg  bg-body-tertiary ">
   <div class="container-fluid">
     <img src="https://i.pinimg.com/originals/b9/f2/a6/b9f2a640b168cdb9f865185facee4cd3.png" , style="max-width:4%" />
     <a class="navbar-brand" href="/">InstaNetwork</a>
@@ -7,25 +7,22 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      
       <div style="margin-left:34.5px">
-       <%= form_with(url: user_search_users_path ,  method: :get ) do |form| %>
-         <%= form.text_field:name %>
-         <%= form.submit "Search" %>
-       <% end %>
+        <%= form_with(url: user_search_users_path ,  method: :get ) do |form| %>
+        <%= form.text_field:name %>
+        <%= form.submit "Search" %>
+        <% end %>
       </div>
-
       <div style="margin-left:16%">
         <% if user_signed_in? %>
         <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } , class:"btn btn-outline-success" %>   
         <% else %>
         <%= link_to "Sign up" , user_session_path , class:"btn btn-outline-success" %>
         <% end %>
-        </div>
-        <div  style="margin-left:1.5%">
+      </div>
+      <div  style="margin-left:1.5%">
         <%= link_to "New post",  new_post_path , class:"btn btn-outline-success" %>
       </div>
-
     </div>
   </div>
 </nav>
