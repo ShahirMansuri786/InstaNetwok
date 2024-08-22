@@ -1,34 +1,24 @@
 class LikesController < ApplicationController
-	before_action :find_post
-
-	def new 
-		@like = Like.new
-	end
+  before_action :find_post
+  def new 
+	  @like = Like.new
+  end
 
   def create
-	if user_signed_in?
-		 @like = @post.likes.new
-		
-		# @like = current_user.post.likes.new()
-	
-    if @like.save!
-	
+    if user_signed_in?
+      @like = @post.likes.new
+        if @like.save! 
+        else
+		      render :new, notice: "Like succesfully created"
+	      end
     else
-		render :new, notice: "Like succesfully created"
-	  end
-  else
-	redirect_to user_session_path
-  end
+	    redirect_to user_session_path
+    end
   end
 
 	def find_post
-    @post = Post.find(params[:post_id])
-  end
-
-	# def like_params
-  #   params.require(:like).permit(:post_id)
-  # end
-
-	end
+      @post = Post.find(params[:post_id])
+    end
+end
 
 

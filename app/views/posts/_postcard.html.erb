@@ -1,30 +1,24 @@
 <% @posts.each do |p| %>
   <div class="card mb-3 bg-info-subtle" , style="border-radius:20px; width:850px ">
-  
     <% if p.post_images.present? %>
       <div>
-        
-      
         <h5 style="float:left ; margin:10px"><%= User.find_by(id: p.user_id).name %></h5>
         <%= button_to "Follow", user_relationships_path(User.find_by(id: p.user_id)), method: :post, class: "btn btn-danger", form: { data: { turbo: false } } unless User.find_by(id: p.user_id).followers.find_by(follower: current_user).present? %>
         <%= button_to "unfollow" , relationship_path(User.find_by(id: p.user_id).followers.find_by(follower: current_user).id) , method: :delete , class:"btn btn-danger" if User.find_by(id: p.user_id).followers.find_by(follower: current_user).present? %>
-         
-        
         <%= image_tag main_app.rails_blob_url(p&.post_images&.first&.attachments&.first), style: "max-width: 100%; border-radius:10px" %>
         <p><%= p.caption %></p>
-
         <!-- like button -->
         <div style="display:inline; display:flex; margin-bottom:15px">
           <%= form_with(url: post_likes_path(p)) do %> 
             <button class="btn btn-outline-success"><%= Like %></button> 
             <button class="btn btn-outline-success"><%= Post.find(p.id).likes.count %></button>
           <% end %>
-          <div>
-            <%= link_to "Create Comment", new_post_comment_path(p), class: "btn btn-outline-success ms-1" %>
-          </div> 
-          <div>
-            <%= render "posts/allcomment", post: p %>
-          </div>
+            <div>
+              <%= link_to "Create Comment", new_post_comment_path(p), class: "btn btn-outline-success ms-1" %>
+            </div> 
+            <div>
+              <%= render "posts/allcomment", post: p %>
+            </div>
         </div>
       </div>
     <% end %>
