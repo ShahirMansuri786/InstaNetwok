@@ -30,15 +30,14 @@ class CommentsController < ApplicationController
     if user_signed_in?
       @comment = Comment.find(params[:id])
       @comment.destroy
-      redirect_to comments_path
     else
       redirect_to user_session_path
     end
   end
-  
+
   private
     def comment_params
-      params.permit(:comment_text)
+      params.permit(:comment_text , :user_id )
     end
   
   def find_post
