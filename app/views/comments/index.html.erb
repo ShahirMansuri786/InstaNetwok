@@ -5,9 +5,9 @@
 <body>
   <div>
     <%= post_comments.each do |comment| %>
-    <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
-      <p> <%= comment.comment_text %>  </p>
-    </div>
+      <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
+        <p> <%= comment.comment_text %></p>
+      </div>
     <% end %>   
   </div>
 </body>

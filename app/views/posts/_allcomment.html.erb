@@ -5,13 +5,30 @@
     </div>
     <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
-        <%= post.comments.each do |comment| %>
-        <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
-          <p> <%= comment.comment_text %></p>
-        </div>
-        <% end %>  
-      </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Comment</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% post.comments.each do |comment| %>
+              <tr>
+                <td><%= User.find(comment.user_id).name %></td>
+                <td><%= comment.comment_text %></td>
+                <td>
+                  <% if user_signed_in? && current_user.id == comment.user_id %>
+                    <%= link_to "Delete", post_comment_path(post_id: comment.post_id, id: comment.id), class: "btn btn-outline-success btn-sm", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div> 
     </div>
   </div>
 </div>
- 
+
