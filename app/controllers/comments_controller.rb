@@ -30,6 +30,7 @@ class CommentsController < ApplicationController
     if user_signed_in?
       @comment = Comment.find(params[:id])
       @comment.destroy
+      redirect_to post_path(params[:post_id])
     else
       redirect_to user_session_path
     end
