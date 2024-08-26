@@ -13,7 +13,7 @@
         <%= image_tag (@post.post_images.first.attachments.first  if @post.post_images.attached?) , style:" max-width: 100%;" %>
         <div class="mt-3">
           <p><%= @post.caption %></p>
-          <div>
+          <div class="d-flex">
             <% if user_signed_in? %>
               <% if Like.where(user_id: current_user.id , likeable_id: @post.id ).present? %> 
                 <%= link_to "Unlike", post_like_path(post_id:@post.id , id:Like.find_by(user_id: current_user.id , likeable_id: @post.id ).id ) , class: "btn btn-outline-success btn-sm", style:"height:38px" , data: { turbo_method: :delete } %>
@@ -24,16 +24,22 @@
               <button class="btn btn-outline-success"><%= Post.find(@post.id).likes.count %></button>
               <% end %>
               <% end %>
-            <% end %> 
-            <div>
-              <%=render "posts/allcomment" , post: @post %>
-            </div> 
+              <% end %> 
+              <div>
+              <%= link_to "Create Comment", new_post_comment_path(@post), class: "btn btn-outline-success ms-1" %>
+              </div> 
+              <div>
+                <%=render "posts/allcomment" , post: @post %>
+              </div> 
+            </div>
+
             <div style="margin-left:93.5%">
               <%= link_to 'Back', posts_path, class:"btn btn-outline-success" %>
             </div>
-            <% else %><div class="form-group mt-4 , text-center">
+            <% else %>
+            <div class="form-group mt-4 , text-center">
             <%= form.submit 'Create Post', class: 'btn btn-dark' %>
-          </div>
+            </div>
             <p>There is no post available</p>
             <% end %>
         </div>
