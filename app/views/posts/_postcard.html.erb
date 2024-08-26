@@ -9,16 +9,23 @@
         <p><%= p.caption %></p>
         <!-- like button -->
         <div style="display:inline; display:flex; margin-bottom:15px">
-          <%= form_with(url: post_likes_path(p)) do %> 
-            <button class="btn btn-outline-success"><%= Like %></button> 
-            <button class="btn btn-outline-success"><%= Post.find(p.id).likes.count %></button>
+          <% if user_signed_in? %>
+          <% if Like.where(user_id: current_user.id , likeable_id: p.id ).present? %> 
+          <%= link_to "Unlike", post_like_path(post_id:p.id , id:Like.find_by(user_id: current_user.id , likeable_id: p.id ).id ) , class: "btn btn-outline-success btn-sm", style:"height:38px" , data: { turbo_method: :delete } %>
+          <button class="btn btn-outline-success , ms-1"  style="height:38px"><%= Post.find(p.id).likes.count %></button>
+          <% else %>
+          <%= form_with(url: post_likes_path(p)) do %>
+          <button class="btn btn-outline-success"> <%= Like %> </button>
+          <button class="btn btn-outline-success"><%= Post.find(p.id).likes.count %></button>
           <% end %>
-            <div>
-              <%= link_to "Create Comment", new_post_comment_path(p), class: "btn btn-outline-success ms-1" %>
-            </div> 
-            <div>
-              <%= render "posts/allcomment", post: p %>
-            </div>
+          <% end %>
+          <% end %> 
+          <div>
+            <%= link_to "Create Comment", new_post_comment_path(p), class: "btn btn-outline-success ms-1" %>
+          </div> 
+          <div>
+            <%= render "posts/allcomment", post: p %>
+          </div>
         </div>
       </div>
     <% end %>
