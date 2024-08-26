@@ -14,9 +14,9 @@ class LikesController < ApplicationController
   end
 
   def destroy
-        like = Like.find(params[:id])
-        like.destroy
-        redirect_to posts_path
+    like = Like.find(params[:id])
+    like.destroy
+    redirect_to posts_path
   end
 
 	def find_post
