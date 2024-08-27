@@ -4,12 +4,18 @@
       .box:hover{
         box-shadow: 10px 10px 20px 10px grey ;
         border-radius:10px;}
+      
+        .box{
+          position:relative;
+          top:100px;
+        }
+
     </style> 
   </head>
 <body>
-  <div style="width:1300px" class="box , container" >
-    <div style="margin-top:8%" class="container , bg-body-secondary">
-      <div style="margin-left:95.5%">
+  <div style="width:850px" class="box , container" >
+    <div class="container , bg-body-secondary">
+      <div style="margin-left:94%">
         <%= link_to 'Back', posts_path, class:"btn btn-outline-success" %>
       </div>
       <%= form_with(url: user_profile_path(@user_profile) , method: :put) do |form| %>
