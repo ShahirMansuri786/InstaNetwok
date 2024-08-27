@@ -8,8 +8,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    # @user = User.find(params[:id])
-    # @relation = @user.followers.find_by(follower: current_user)
+     @user = User.find(params[:id])
+     @user_post = Post.where(user_id: @user.id)
   end
 
   def user_update
@@ -37,6 +37,7 @@ class UsersController < ApplicationController
     @user_present = User.find_by(name:params[:name]).present?
     @user_search = User.find_by(name: params[:name])
   end
+  
 
   private
   def user_params
