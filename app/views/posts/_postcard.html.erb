@@ -2,9 +2,18 @@
   <div class="card mb-3 bg-info-subtle" , style="border-radius:20px; width:850px ">
     <% if p.post_images.present? %>
       <div>
-        <h5 style="float:left ; margin:10px"><%= User.find_by(id: p.user_id).name %></h5>
-        <%= button_to "Follow", user_relationships_path(User.find_by(id: p.user_id)), method: :post, class: "btn btn-danger", form: { data: { turbo: false } } unless User.find_by(id: p.user_id).followers.find_by(follower: current_user).present? %>
-        <%= button_to "unfollow" , relationship_path(User.find_by(id: p.user_id).followers.find_by(follower: current_user).id) , method: :delete , class:"btn btn-danger" if User.find_by(id: p.user_id).followers.find_by(follower: current_user).present? %>
+        <div class="d-flex">
+          <h5 style="float:left ; margin:10px"><%= User.find_by(id: p.user_id).name %></h5>
+          <%= button_to "Follow", user_relationships_path(User.find_by(id: p.user_id)), method: :post, class: "btn btn-danger", form: { data: { turbo: false } } unless User.find_by(id: p.user_id).followers.find_by(follower: current_user).present? %>
+          <%= button_to "unfollow" , relationship_path(User.find_by(id: p.user_id).followers.find_by(follower: current_user).id) , method: :delete , class:"btn btn-danger" if User.find_by(id: p.user_id).followers.find_by(follower: current_user).present? %>
+            <div style="margin-left:73%">
+              <% if user_signed_in? %>
+              <% if p.user_id == current_user.id %>
+              <%= link_to "delete" , post_path(p.id) , class:"btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+              <% end %>
+              <% end %>
+            </div>
+        </div>
         <%= image_tag main_app.rails_blob_url(p&.post_images&.first&.attachments&.first), style: "max-width: 100%; border-radius:10px" %>
         <p><%= p.caption %></p>
         <!-- like button -->
