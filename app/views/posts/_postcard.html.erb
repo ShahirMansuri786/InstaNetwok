@@ -21,12 +21,17 @@
           <% if user_signed_in? %>
           <% if Like.where(user_id: current_user.id , likeable_id: p.id ).present? %> 
           <%= link_to "Unlike", post_like_path(post_id:p.id , id:Like.find_by(user_id: current_user.id , likeable_id: p.id ).id ) , class: "btn btn-outline-success btn-sm", style:"height:38px" , data: { turbo_method: :delete } %>
-          <button class="btn btn-outline-success , ms-1"  style="height:38px"><%= Post.find(p.id).likes.count %></button>
+          <div>
+          <%= render "posts/allLikes", post: p %>
+          </div>
+
           <% else %>
           <%= form_with(url: post_likes_path(p)) do %>
           <button class="btn btn-outline-success"> <%= Like %> </button>
-          <button class="btn btn-outline-success"><%= Post.find(p.id).likes.count %></button>
           <% end %>
+          <div>
+          <%= render "posts/allLikes", post: p %>
+          </div>
           <% end %>
           <% end %> 
           <div>

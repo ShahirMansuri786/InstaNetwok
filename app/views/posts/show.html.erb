@@ -13,20 +13,24 @@
         <%= image_tag (@post.post_images.first.attachments.first  if @post.post_images.attached?) , style:" max-width: 100%;" %>
         <div class="mt-3">
           <p><%= @post.caption %></p>
-          <div class="d-flex">
-            <% if user_signed_in? %>
-              <% if Like.where(user_id: current_user.id , likeable_id: @post.id ).present? %> 
-                <%= link_to "Unlike", post_like_path(post_id:@post.id , id:Like.find_by(user_id: current_user.id , likeable_id: @post.id ).id ) , class: "btn btn-outline-success btn-sm", style:"height:38px" , data: { turbo_method: :delete } %>
-                <button class="btn btn-outline-success , ms-1"  style="height:38px"><%= Post.find(@post.id).likes.count %></button>
-              <% else %>
-              <%= form_with(url: post_likes_path(@post)) do %>
-              <button class="btn btn-outline-success"> <%= Like %> </button>
-              <button class="btn btn-outline-success"><%= Post.find(@post.id).likes.count %></button>
+            <div class="d-flex">
+              <% if user_signed_in? %>
+                <% if Like.where(user_id: current_user.id , likeable_id: @post.id ).present? %> 
+                  <%= link_to "Unlike", post_like_path(post_id:@post.id , id:Like.find_by(user_id: current_user.id , likeable_id: @post.id ).id ) , class: "btn btn-outline-success btn-sm", style:"height:38px" , data: { turbo_method: :delete } %>
+                  <div>
+                    <%= render "posts/allLikes", post: @post %>
+                  </div>
+                <% else %>
+                <%= form_with(url: post_likes_path(@post)) do %>
+                <button class="btn btn-outline-success"> <%= Like %> </button>
               <% end %>
+              <div>
+                <%= render "posts/allLikes", post: @post %>
+              </div>
               <% end %>
               <% end %> 
               <div>
-              <%= link_to "Create Comment", new_post_comment_path(@post), class: "btn btn-outline-success ms-1" %>
+                <%= link_to "Create Comment", new_post_comment_path(@post), class: "btn btn-outline-success ms-1" %>
               </div> 
               <div>
                 <%=render "posts/allcomment" , post: @post %>

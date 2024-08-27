@@ -1,34 +1,33 @@
-<div class="accordion accordion-flush" id="accordionFlushExample">
-  <div class="accordion-item">
-    <div data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-      <p class="btn btn-outline-success ms-1"> All comments </p>
-    </div>
-    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Comment</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% post.comments.each do |comment| %>
-              <tr>
-                <td><%= User.find(comment.user_id).name %></td>
-                <td><%= comment.comment_text %></td>
-                <td>
-                  <% if user_signed_in? && current_user.id == comment.user_id %>
-                    <%= link_to "Delete", post_comment_path(post_id: comment.post_id, id: comment.id), class: "btn btn-outline-success btn-sm", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div> 
-    </div>
+<p class="d-inline-flex gap-1">
+  <button class="btn btn-outline-success ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseComments" aria-expanded="false" aria-controls="collapseComments">
+    All comments
+  </button>
+</p>
+<div class="collapse" id="collapseComments">
+  <div class="card card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Comment</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% post.comments.each do |comment| %>
+          <tr>
+            <td><%= User.find(comment.user_id).name %></td>
+            <td><%= comment.comment_text %></td>
+            <td>
+              <% if user_signed_in? && current_user.id == comment.user_id %>
+                <%= link_to "Delete", post_comment_path(post_id: comment.post_id, id: comment.id), class: "btn btn-outline-success btn-sm", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
+
 
