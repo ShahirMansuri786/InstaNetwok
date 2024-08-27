@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :find_post 
+  before_action :find_post
+  before_action :authenticate_user! 
 
   def index
     @post_comments = @post.comments.all

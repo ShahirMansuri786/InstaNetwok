@@ -7,7 +7,7 @@ class LikesController < ApplicationController
   def create
     if user_signed_in?
       @like = @post.likes.create(user_id: current_user.id)
-      redirect_to posts_path
+      redirect_to post_path(@post)
     else
 	    redirect_to user_session_path
     end
