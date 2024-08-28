@@ -1,0 +1,19 @@
+<p class="d-inline-flex gap-1 ">
+  <p class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  Followed
+  </p>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body" >
+    <table class="table" >    
+      <tbody>
+        <% user_following.each do |user| %>
+          <tr>
+            <td><%= User.find(Relationship.find(user.id).follower_id).name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

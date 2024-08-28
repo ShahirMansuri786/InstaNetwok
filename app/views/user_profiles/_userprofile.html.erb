@@ -7,10 +7,12 @@
         <div>
           <% if UserProfile.find_by(user_id:current_user.id).present? %> 
             <% if (UserProfile.find_by(user_id:current_user).profile_image.present?) %>
+            <a href="/users/<%= current_user.id %> " >
             <%= image_tag (UserProfile.find_by(user_id:current_user).profile_image&.attachments&.first  if UserProfile.find_by(user_id:current_user).profile_image.attached? ) , style:"width:100px; height:100px ; border-radius:180px " %> 
+            </a>
             <% end %>
             <div>
-            <%= link_to "change" ,  edit_user_profile_path(UserProfile.find_by(user_id:current_user)) ,  class: "btn btn-outline-success" %>
+            <%= link_to "..." ,  edit_user_profile_path(UserProfile.find_by(user_id:current_user))  %>
             </div>
             <% else %>
             <%= link_to "Upload profile" , new_user_profile_path %>
@@ -22,8 +24,8 @@
               <tr>
                 <td>Name</td>
                 <td>
-                  <%= current_user.name %>
-                  <%= link_to "Edit", user_edit_path(current_user.id), class: "btn btn-outline-success", style: "width:60px; height:28px" %>
+                  
+                  <%= link_to "#{current_user.name}", user_edit_path(current_user.id), class:"btn btn-outline-success"  %>
                 </td>
               </tr>
               <tr>
@@ -35,7 +37,7 @@
                   <td>Bio</td>
                   <td>
                     <%= current_user.user_info.bio %>
-                    <%= link_to "Edit", edit_user_info_path(current_user.user_info.id), class: "btn btn-outline-success", style: "width:60px; height:28px" %>
+                    <%= link_to "...", edit_user_info_path(current_user.user_info.id) %>
                   </td>
                 </tr>
               <% else %>
