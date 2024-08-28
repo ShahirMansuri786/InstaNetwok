@@ -20,18 +20,18 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">User_name</th>
-          <th scope="col">Follower</th>
-          <th scope="col">Followed</th>
+          <th scope="col" class="pb-4">Name</th>
+          <th scope="col" class="pb-4">User_name</th>
+          <th scope="col"><%= render "allFollower" , user_follower: @user_follower %> </th>
+          <th scope="col"><%= render "allFollowed" , user_following: @user_following %></th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><%= @user.name %></td>
           <td><%= @user.user_name %></td>
-          <td><%= @user.following.count %> <%= render "allFollower" , user_follower: @user_follower %>  </td>
-          <td><%= @user.followers.count %> <%= render "allFollowed" , user_following: @user_following %> </td>
+          <td><%= @user.following.count %>  </td>
+          <td><%= @user.followers.count %>  </td>
         </tr>
       </tbody>
     </table>

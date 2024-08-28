@@ -1,17 +1,12 @@
 <p class="d-inline-flex gap-1">
-  <button class="btn btn-outline-success ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
-    See
-  </button>
+  <p class=" ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+    Followers
+  </p>
 </p>
 <!-- First collapsible section -->
 <div class="collapse" id="collapseExample1">
   <div class="card card-body">
     <table class="table">
-      <thead>
-        <tr>
-          <th>Followers</th>
-        </tr>
-      </thead>
       <tbody>
         <% user_follower.each do |user| %>
           <tr>
