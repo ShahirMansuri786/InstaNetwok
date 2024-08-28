@@ -24,8 +24,7 @@
               <tr>
                 <td>Name</td>
                 <td>
-                  
-                  <%= link_to "#{current_user.name}", user_edit_path(current_user.id), class:"btn btn-outline-success"  %>
+                  <%= link_to "#{current_user.name}", user_edit_path(current_user.id) , class:"nav-link"  %>
                 </td>
               </tr>
               <tr>
@@ -36,8 +35,7 @@
                 <tr>
                   <td>Bio</td>
                   <td>
-                    <%= current_user.user_info.bio %>
-                    <%= link_to "...", edit_user_info_path(current_user.user_info.id) %>
+                    <%= link_to "#{current_user.user_info.bio}", edit_user_info_path(current_user.user_info.id)  , class:"nav-link"%>
                   </td>
                 </tr>
               <% else %>
@@ -50,15 +48,13 @@
               <tr>
                 <td>Followers</td>
                 <td>
-                  <%= current_user.followers.count %>
-                  <%= link_to "See", user_followed_users_path, class: "btn btn-outline-success", style: "width:60px; height:28px" %>
+                  <%= link_to "#{current_user.followers.count}", user_followed_users_path, class:"nav-link"  %>
                 </td>
               </tr>
               <tr>
                 <td>Followed</td>
                 <td>
-                  <%= current_user.following.count %>
-                  <%= link_to "See", user_follower_users_path, class: "btn btn-outline-success", style: "width:60px; height:28px" %>
+                  <%= link_to "#{current_user.following.count}", user_follower_users_path, class:"nav-link" %>
                 </td>
               </tr>
             </tbody>
