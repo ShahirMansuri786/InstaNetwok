@@ -1,0 +1,15 @@
+<div  style="margin:400px;">
+  <div id="messages">
+    <% if @messages.present? %>
+   
+    <% else %>
+      <p>No messages yet.</p>
+    <% end %>
+  </div>
+  <%= form_with(url: chats_path, remote: true) do |form| %>
+    <%= form.hidden_field :receiver_id, value: 12 %>
+    <%= form.hidden_field :sender_id, value: current_user.id %>
+    <%= form.text_area :content, rows: 3 %>
+    <%= form.submit 'Send' %>
+  <% end %>
+</div>
