@@ -1,7 +1,11 @@
 <div  style="margin:400px;">
   <div id="messages">
     <% if @messages.present? %>
-   
+
+    <% @messages.each do |message| %>
+        <p><strong>User <%= message.sender_id %>:</strong> <%= message.content %></p>
+    <% end %>
+
     <% else %>
       <p>No messages yet.</p>
     <% end %>
