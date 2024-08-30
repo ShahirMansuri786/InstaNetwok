@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
+
+
+ resources :chats, only: [:index, :create , :show]
+  root 'chats#index'
+
+   mount ActionCable.server => '/cable'
+
+
   resources :user_infos
   devise_for :users
-  root to: "posts#index"
+  # root to: "posts#index"
 
   resources :posts, only: [:new, :create, :show , :index ,:destroy] do
     resources :likes 
