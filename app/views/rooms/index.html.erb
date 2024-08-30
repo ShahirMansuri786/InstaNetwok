@@ -1,0 +1,40 @@
+<div style="margin:300px">
+<div class="conatainer-fluid">
+<div class="row">
+<div class="col-3">
+
+<%= render 'form' ,  room: Room.new %>
+
+<h1>Rooms</h1>
+
+<div id="rooms">
+  <% @rooms.each do |room| %>
+   
+    <%= link_to room_path(room.id) do %>
+    <div class="card mb-2">
+      <div class="card-body">
+        <%= room.name %>
+      </div>
+    </div>
+    <% end  %>
+  <% end %>
+</div>
+
+ <div class="col-9">
+    <% if @room.present? %>
+      <p><%= @room.name %></p>
+
+      <% @room.messages.each do |message| %>
+        <p> <%= message.content %> : <%= User.find(message.user_id).name %> </p>
+      <% end %>
+
+      <div>
+        <%= render 'messages/form' , message: Message.new , room: @room , user: current_user.id%>
+      </div>
+    <% end %>
+ </div>
+
+</div>
+</div>
+</div>
+</div>

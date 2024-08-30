@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def show
+  def show_user
      @user = User.find(params[:id])
      @user_post = Post.where(user_id: @user.id)
      @user_following = Relationship.where(followed_id:@user.id)
