@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :user_infos
-  #  root to: "posts#index"
+   root to: "posts#index"
 
   resources :posts, only: [:new, :create, :show , :index ,:destroy] do
     resources :likes 
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   resources :messages
   resources :rooms
 
-  root to: 'rooms#index'
+  # root to: 'rooms#index'
 
   # devise_scope :user do  
   #   get '/users/sign_out' => 'devise/sessions#destroy'     

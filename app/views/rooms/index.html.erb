@@ -1,40 +1,48 @@
-<div style="margin:300px">
-<div class="conatainer-fluid">
-<div class="row">
-<div class="col-3">
+<html>
+  <head>
+    <style>
+      .Chat{
+        width:400px;
+        position: relative;
+        top:100px;
+        left:400px; }
+    </style>
+  </head>
+  <body>
+    <div class="Chat , card">
+      <div class="conatainer-fluid">
+        <div class="row">
+          <div class="col-3">
+            <%= render 'form' ,  room: Room.new %>
 
-<%= render 'form' ,  room: Room.new %>
+            <div class="mt-5">
+              <h5>ChatList</h5>
+              <div id="rooms">
+                <% @rooms.each do |room| %>
+                  <%= link_to room_path(room.id) do %>
+                    <div class="d-flex">
+                      <%= room.name %>
+                      <%= link_to "Delete" , room_path(room.id) , data: { turbo_method: :delete  , turbo_confirm: "Are you sure?" } ,  class:"nav-link" %>
+                    </div>
+                  <% end  %>
+                <% end %>
+              </div>
+            </div>
 
-<h1>Rooms</h1>
-
-<div id="rooms">
-  <% @rooms.each do |room| %>
-   
-    <%= link_to room_path(room.id) do %>
-    <div class="card mb-2">
-      <div class="card-body">
-        <%= room.name %>
+            <div class="col-9">
+              <% if @room.present? %>
+                <p><%= @room.name %></p>
+                <% @room.messages.each do |message| %>
+                  <p> <%= message.content %> : <%= User.find(message.user_id).name %> </p>
+                <% end %>
+                <div>
+                  <%= render 'messages/form' , message: Message.new , room: @room , user: current_user.id%>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <% end  %>
-  <% end %>
-</div>
-
- <div class="col-9">
-    <% if @room.present? %>
-      <p><%= @room.name %></p>
-
-      <% @room.messages.each do |message| %>
-        <p> <%= message.content %> : <%= User.find(message.user_id).name %> </p>
-      <% end %>
-
-      <div>
-        <%= render 'messages/form' , message: Message.new , room: @room , user: current_user.id%>
-      </div>
-    <% end %>
- </div>
-
-</div>
-</div>
-</div>
-</div>
+  </body>
+</html>

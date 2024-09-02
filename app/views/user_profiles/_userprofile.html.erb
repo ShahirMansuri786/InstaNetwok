@@ -57,6 +57,14 @@
                   <%= link_to "#{current_user.following.count}", user_follower_users_path, class:"nav-link" %>
                 </td>
               </tr>
+              
+              <tr>
+              <td>Chat</td>
+              <td>
+                <%= link_to "Room", rooms_path, class:"nav-link" %>
+              </td>
+            </tr>
+
             </tbody>
           </table>
         </div>
