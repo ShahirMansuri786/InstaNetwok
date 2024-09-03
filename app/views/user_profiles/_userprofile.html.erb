@@ -57,14 +57,14 @@
                   <%= link_to "#{current_user.following.count}", user_follower_users_path, class:"nav-link" %>
                 </td>
               </tr>
-              
               <tr>
               <td>Chat</td>
               <td>
-                <%= link_to "Room", rooms_path, class:"nav-link" %>
+                <a href="<%= rooms_path %>" >
+                  <img src="https://static.vecteezy.com/system/resources/thumbnails/006/692/724/small_2x/chatting-message-icon-template-black-color-editable-chatting-message-icon-symbol-flat-illustration-for-graphic-and-web-design-free-vector.jpg" , style="width:40px ; height:40px"  >
+                </a>
               </td>
             </tr>
-
             </tbody>
           </table>
         </div>
