@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
 
   def show
     @rooms = Room.all
-    render 'index'
+   
   end
 
   def new
@@ -18,8 +18,8 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(room_params)
-    if @room.save
+    room = Room.new(room_params)
+    if room.save
     else 
     end
   end
@@ -31,16 +31,20 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    byebug
-    @room.destroy!
+    if @room.destroy!
+    end
   end
 
   private
     def set_room
-      @room = Room.find(params[:id])
+      if Room.any?
+        @room = Room.find(params[:id])
+      end  
     end
 
     def room_params
       params.require(:room).permit(:name)
     end
+
+    
 end

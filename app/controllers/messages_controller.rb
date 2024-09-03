@@ -16,9 +16,9 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.new(message_params)
-      if @message.save
-        redirect_to request.referrer
+    message = Message.new(message_params)
+      if message.save
+        ActionCable.server.broadcast "room_channel_#{message.room_id}" ,{ message: "i love rails" }
       else
       end
   end
@@ -35,7 +35,7 @@ class MessagesController < ApplicationController
 
   private
     def set_message
-      @message = Message.find(params[:id])
+        @message = Message.find(params[:id])
     end
 
     def message_params

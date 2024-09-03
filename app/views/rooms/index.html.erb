@@ -12,33 +12,30 @@
     <div class="Chat , card">
       <div class="conatainer-fluid">
         <div class="row">
-          <div class="col-3">
+          <div class="col-9">
             <%= render 'form' ,  room: Room.new %>
 
             <div class="mt-5">
-              <h5>ChatList</h5>
+              <h5>Room</h5>
               <div id="rooms">
+              <% if Room.any? %>
                 <% @rooms.each do |room| %>
-                  <%= link_to room_path(room.id) do %>
-                    <div class="d-flex">
-                      <%= room.name %>
-                      <%= link_to "Delete" , room_path(room.id) , data: { turbo_method: :delete  , turbo_confirm: "Are you sure?" } ,  class:"nav-link" %>
-                    </div>
+                  
+                  <% if Room.new.find_room_for_current_user(room , current_user.id) %>
+                 
+                    <%= link_to room_path(room.id) do %>
+                      <div class="d-flex">
+                        <p><%= room.name %> 
+                          <%= link_to "Delete" , room_path(room.id) , data: { turbo_method: :delete  , turbo_confirm: "Are you sure?" } ,  class:"nav-link" %>
+                        </p>
+                      </div>
+                    <% end %>
+                  <% else %>
+                    <%= room.name %> 
                   <% end  %>
                 <% end %>
-              </div>
-            </div>
-
-            <div class="col-9">
-              <% if @room.present? %>
-                <p><%= @room.name %></p>
-                <% @room.messages.each do |message| %>
-                  <p> <%= message.content %> : <%= User.find(message.user_id).name %> </p>
-                <% end %>
-                <div>
-                  <%= render 'messages/form' , message: Message.new , room: @room , user: current_user.id%>
-                </div>
               <% end %>
+              </div>
             </div>
           </div>
         </div>

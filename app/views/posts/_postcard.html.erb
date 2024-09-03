@@ -4,7 +4,7 @@
       <div>
         <div class="d-flex p-1">  
         <div>      
-          <a href="<%= show_user_path(current_user.id) %> " >
+          <a href="<%= show_user_path(current_user.id) if user_signed_in? %> " >
             <%= image_tag main_app.rails_blob_url(UserProfile.find_by(user_id: p.user_id).profile_image.attachments&.first), style: "max-width:50px; border-radius:100px" %>
           </a>
         </div>
