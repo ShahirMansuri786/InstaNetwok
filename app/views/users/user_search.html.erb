@@ -18,7 +18,7 @@
           <div style="text-align: center; margin-top: 30px;">
             <% if UserProfile.find_by(user_id: @user_search).present? %>
               <% if UserProfile.find_by(user_id: @user_search.id).profile_image.present? %>
-              <a href="/users/<%= @user_search.id %> " >
+              <a href="<%= show_user_path(@user_search.id) %> " >
                 <%= image_tag (UserProfile.find_by(user_id:@user_search.id).profile_image&.attachments&.first  if UserProfile.find_by(user_id: @user_search.id).profile_image.attached? ) , style:"width:100px; height:100px ; border-radius:180px " %> 
               </a>
               <% end %>

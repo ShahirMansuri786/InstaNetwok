@@ -4,39 +4,39 @@
       <div>
         <div class="d-flex p-1">  
         <div>      
-         <a href="/users/<%= p.user_id %>  "> 
-         <%= image_tag main_app.rails_blob_url(UserProfile.find_by(user_id: p.user_id).profile_image.attachments&.first), style: "max-width:50px; border-radius:100px" %>
-         </a>
-         </div>
+          <a href="<%= show_user_path(current_user.id) if user_signed_in? %> " >
+            <%= image_tag main_app.rails_blob_url(UserProfile.find_by(user_id: p.user_id).profile_image.attachments&.first), style: "max-width:50px; border-radius:100px" %>
+          </a>
+        </div>
           <h6 style="float:left ; margin:10px"><%= User.find_by(id: p.user_id).name %></h6>
           <%= button_to "Follow", user_relationships_path(User.find_by(id: p.user_id)), method: :post, class: "btn btn-primary", form: { data: { turbo: false } } unless User.find_by(id: p.user_id).followers.find_by(follower: current_user).present? %>
           <%= button_to "Unfollow" , relationship_path(User.find_by(id: p.user_id).followers.find_by(follower: current_user).id) , method: :delete , class:"btn btn-primary" if User.find_by(id: p.user_id).followers.find_by(follower: current_user).present? %>
           <div style="margin-left:64%">
-              <% if user_signed_in? %>
-              <% if p.user_id == current_user.id %>
-              <%= link_to "delete" , post_path(p.id) , class:"btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
-              <% end %>
-              <% end %>
-            </div>
+            <% if user_signed_in? %>
+            <% if p.user_id == current_user.id %>
+            <%= link_to "delete" , post_path(p.id) , class:"btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
+            <% end %>
+            <% end %>
+          </div>
         </div>
         <%= image_tag main_app.rails_blob_url(p&.post_images&.first&.attachments&.first), style: "max-width: 100%; border-radius:10px" %>
         <p><%= p.caption %></p>
         <!-- like button -->
         <div style="display:inline; display:flex; margin-bottom:15px">
           <% if user_signed_in? %>
-          <% if Like.where(user_id: current_user.id , likeable_id: p.id ).present? %> 
-          <%= link_to "Unlike", post_like_path(post_id:p.id , id:Like.find_by(user_id: current_user.id , likeable_id: p.id ).id ) , class: "btn btn-outline-success btn-sm", style:"height:38px" , data: { turbo_method: :delete } %>
-          <div>
-          <%= render "posts/allLikes", post: p %>
-          </div>
+            <% if Like.where(user_id: current_user.id , likeable_id: p.id ).present? %> 
+            <%= link_to "Unlike", post_like_path(post_id:p.id , id:Like.find_by(user_id: current_user.id , likeable_id: p.id ).id ) , class: "btn btn-outline-success btn-sm", style:"height:38px" , data: { turbo_method: :delete } %>
+            <div>
+              <%= render "posts/allLikes", post: p %>
+            </div>
 
-          <% else %>
-          <%= form_with(url: post_likes_path(p)) do %>
-          <button class="btn btn-outline-success"> <%= Like %> </button>
-          <% end %>
-          <div>
-          <%= render "posts/allLikes", post: p %>
-          </div>
+            <% else %>
+              <%= form_with(url: post_likes_path(p)) do %>
+              <button class="btn btn-outline-success"> <%= Like %> </button>
+            <% end %>
+            <div>
+              <%= render "posts/allLikes", post: p %>
+            </div>
           <% end %>
           <% end %> 
           <div>
@@ -50,4 +50,3 @@
     <% end %>
   </div>
 <% end %>
-

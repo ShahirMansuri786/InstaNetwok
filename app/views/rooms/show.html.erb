@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <style>
+      .Chat{
+        width:400px;
+        position: relative;
+        top:100px;
+        left:400px; }
+    </style>
+  </head>
+  <body>
+    <div class="Chat , card">
+      <div class="conatainer-fluid">
+        <div class="row">
+          <div class="col-9">
+            <div class="col-9">
+              <% if @room.present? %>
+                <p><%= @room.name %>  <%= link_to "...", rooms_path %> </p>
+                <% @room.messages.each do |message| %>
+                  <% if current_user.id == User.find(message.user_id).id %>
+                  <div class="text-end"> 
+                    <%= message.content %>
+                    <p style="font-size:12px"><%= User.find(message.user_id).name %></p>
+                  </div>
+                  <% else %>
+                    <div class= "ms-2">  
+                      <%= message.content %>
+                      <p style="font-size:12px"><%= User.find(message.user_id).name %></p>
+                    </div>
+                  <% end %>
+                <% end %>
+                <div>
+                  <%= render 'messages/form' , message: Message.new , room: @room , user: current_user.id%>
+                </div>
+              <% end %>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
