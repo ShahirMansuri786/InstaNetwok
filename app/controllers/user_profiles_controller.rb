@@ -33,8 +33,8 @@ class UserProfilesController < ApplicationController
       end
     end
 
-      private
-      def user_profile_params
-        params.permit(:profile_image)
-      end
+    private
+    def user_profile_params
+      params.permit(:profile_image)
     end
+end
