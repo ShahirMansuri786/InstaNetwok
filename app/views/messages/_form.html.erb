@@ -11,7 +11,7 @@
   <% end %>
 
   <div>
-    <%= form.text_area :content  , placeholder:"message here"%>
+    <%= form.text_area :content  , placeholder:"message here" , class:"w-100" %>
   </div>
   <div>
     <%= form.hidden_field :user_id , value: user %>
@@ -20,6 +20,6 @@
     <%= form.hidden_field :room_id  , value: room.id %>
   </div>
   <div>
-    <%= form.submit %>
+    <%= form.submit "Send" %>
   </div>
 <% end %>

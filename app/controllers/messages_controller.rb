@@ -19,14 +19,11 @@ class MessagesController < ApplicationController
     message = Message.new(message_params)
       if message.save
         ActionCable.server.broadcast "room_channel_#{message.room_id}" ,{ message: "i love rails" }
-      else
       end
   end
 
   def update
-    if @message.update(message_params)
-    else
-    end
+    @message.update(message_params)
   end
 
   def destroy
