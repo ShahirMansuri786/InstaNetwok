@@ -6,7 +6,6 @@ class RoomsController < ApplicationController
   end
 
   def show
-    #@rooms = Room.all
   end
 
   def new
@@ -18,7 +17,9 @@ class RoomsController < ApplicationController
 
   def create
     room = Room.new(room_params)
-    room.save
+    if room.save
+      redirect_to rooms_path
+    end
   end
 
   def update
@@ -26,14 +27,14 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    @room.destroy!
+    if @room.destroy!
+      redirect_to rooms_path
+    end
   end
 
   private
     def set_room
-      if Room.any?
-        @room = Room.find(params[:id])
-      end  
+      @room = Room.find(params[:id]) 
     end
 
     def room_params

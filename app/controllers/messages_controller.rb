@@ -17,9 +17,10 @@ class MessagesController < ApplicationController
 
   def create
     message = Message.new(message_params)
-      if message.save
-        ActionCable.server.broadcast "room_channel_#{message.room_id}" ,{ message: "i love rails" }
-      end
+    if message.save
+      ActionCable.server.broadcast "room_channel_#{message.room_id}" ,{ message: message.content}
+      redirect_to room_path(message.room_id)
+    end
   end
 
   def update
@@ -27,15 +28,17 @@ class MessagesController < ApplicationController
   end
 
   def destroy
-    @message.destroy!
+    if @message.destroy!
+      redirect_to room_path(@message.room_id)
+    end
   end
 
   private
-    def set_message
-        @message = Message.find(params[:id])
-    end
+  def set_message
+    @message = Message.find(params[:id])
+  end
 
-    def message_params
-      params.require(:message).permit(:content, :user_id, :room_id)
-    end
+  def message_params
+    params.require(:message).permit(:content, :user_id, :room_id)
+  end
 end
