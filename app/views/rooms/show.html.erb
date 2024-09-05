@@ -1,7 +1,7 @@
 <html>
   <head>
     <style>
-      .Chat{
+      .chat{
         width:400px;
         position: relative;
         top:100px;
@@ -15,67 +15,70 @@
           background-color: #f9f9f9; 
         }
 
+        .chat:hover{
+          box-shadow: 10px 10px 20px 10px grey ;
+          border:1px solid green;}
+
     </style>
   </head>
   <body>
-    <div class="Chat , card , h-50">
+    <div class="chat , card ">
       <div class="conatainer-fluid">
         <div class="row">
           <div class="col-12">
-            
-              <% if @room.created_by == current_user.id %>
-                <p class="divider py-1 bg-secondary text-light">
-                  <a href="<%= show_user_path(User.find(@room.created_for).id) %> " >
-                    <%= image_tag main_app.rails_blob_url(UserProfile.find_by(user_id: User.find(@room.created_for).id ).profile_image.attachments&.first), style: "width:25px; height:25px; border-radius:100px" %>
-                  </a>
-                  <%= User.find(@room.created_for).name %> <%= link_to "...", rooms_path %> 
-                </p>
-                
-                <div class="messages-container">
-                <% @room.messages.each do |message| %>
-                  <% if current_user.id == User.find(message.user_id).id %>
-                  <div class="text-end , me-3" > 
-                    <%= message.content %>
-                    <p style="font-size:12px" class="text-muted" ><%= User.find(message.user_id).name %></p>
-                  </div>
-                  <% else %>
-                    <div class= "ms-2">  
-                      <%= message.content %>
-                      <p style="font-size:12px" class="text-muted" ><%= User.find(message.user_id).name %></p>
-                    </div>
-                  <% end %>
-                <% end %>
+            <% if @room.created_by == current_user.id %>
+              <p class="divider py-1 bg-secondary text-light">
+                <a href="<%= show_user_path(User.find(@room.created_for).id) %> " >
+                  <%= image_tag main_app.rails_blob_url(UserProfile.find_by(user_id: User.find(@room.created_for).id ).profile_image.attachments&.first), style: "width:25px; height:25px; border-radius:100px" %>
+                </a>
+                <%= User.find(@room.created_for).name %> <%= link_to "...", rooms_path %> 
+              </p>
+              
+              <div class="messages-container" , style="height:400px">
+              <% @room.messages.each do |message| %>
+                <% if current_user.id == User.find(message.user_id).id %>
+                <div class="text-end , me-3" > 
+                  <%= link_to "#{message.content}" , message_path(message.id) , data: { turbo_method: :delete , turbo_confirm: "Are you sure?" }, class: "nav-link" %>
+                  <p style="font-size:12px" class="text-muted" ><%= User.find(message.user_id).name %></p>
                 </div>
-                <div>
-                  <%= render 'messages/form' , message: Message.new , room: @room , user: current_user.id%>
-                </div> 
-
-              <% elsif (@room.created_for == current_user.id) %>
-                <p class="divider py-1 bg-secondary text-light" >
-                  <a href="<%= show_user_path(User.find(@room.created_by).id) %> " >
-                    <%= image_tag main_app.rails_blob_url(UserProfile.find_by(user_id: User.find(@room.created_by).id ).profile_image.attachments&.first), style: "width:25px; height:25px; border-radius:100px" %>
-                  </a>
-                  <%= User.find(@room.created_by).name %> <%= link_to "...", rooms_path %>
-                </p>
-                <div class="messages-container">
-                <% @room.messages.each do |message| %>
-                  <% if current_user.id == User.find(message.user_id).id %>
-                  <div class="text-end me-3"> 
-                    <%= message.content %>
-                    <p style="font-size:12px" , class="text-muted" ><%= User.find(message.user_id).name %></p>
-                  </div>
-                  <% else %>
+                <% else %>
                   <div class= "ms-2">  
                     <%= message.content %>
                     <p style="font-size:12px" class="text-muted" ><%= User.find(message.user_id).name %></p>
                   </div>
-                  <% end %>
                 <% end %>
-                </div>
-                <div>
-                  <%= render 'messages/form' , message: Message.new , room: @room , user: current_user.id%>
-                </div>
               <% end %>
+              </div>
+              <div>
+                <%= render 'messages/form' , message: Message.new , room: @room , user: current_user.id%>
+              </div> 
+
+            <% elsif (@room.created_for == current_user.id) %>
+              <p class="divider py-1 bg-secondary text-light" >
+                <a href="<%= show_user_path(User.find(@room.created_by).id) %> " >
+                  <%= image_tag main_app.rails_blob_url(UserProfile.find_by(user_id: User.find(@room.created_by).id ).profile_image.attachments&.first), style: "width:25px; height:25px; border-radius:100px" %>
+                </a>
+                <%= User.find(@room.created_by).name %> <%= link_to "...", rooms_path %>
+              </p>
+              <div class="messages-container" , style="height:400px">
+              <% @room.messages.each do |message| %>
+                <% if current_user.id == User.find(message.user_id).id %>
+                <div class="text-end me-3"> 
+                  <%= link_to "#{message.content}" , message_path(message.id) , data: { turbo_method: :delete , turbo_confirm: "Are you sure?" }, class: "nav-link" %>
+                  <p style="font-size:12px" , class="text-muted" ><%= User.find(message.user_id).name %></p>
+                </div>
+                <% else %>
+                <div class= "ms-2">  
+                  <%= message.content %>
+                  <p style="font-size:12px" class="text-muted" ><%= User.find(message.user_id).name %></p>
+                </div>
+                <% end %>
+              <% end %>
+              </div>
+              <div>
+                <%= render 'messages/form' , message: Message.new , room: @room , user: current_user.id%>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

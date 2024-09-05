@@ -1,20 +1,25 @@
 <html>
   <head>
     <style>
-      .Chat{
-        width:400px;
+      .chat{
+        width:360px;
         position: relative;
         top:100px;
-        left:400px; }
+        left:400px;}
+        
+      .chat:hover{
+        box-shadow: 10px 10px 20px 10px grey ;
+        border-radius:10px;
+        border:1px solid green;}
     </style>
   </head>
   <body>
-    <div class="Chat , card">
+    <div class="chat , card">
       <div class="conatainer-fluid">
         <div class="row">
           <div class="col-9">
-            <%= render 'form' ,  room: Room.new %>
-              <div class="mt-5">
+            <div class="ms-5 mt-2"><%= render 'form' ,  room: Room.new %></div>
+              <div class="mt-5 ms-5">
                 <h5>Chat List</h5>
                 <% if Room.any? %>
                   <table class="table">
@@ -31,7 +36,7 @@
                               <%= link_to "#{User.find(room.created_for).name}", room_path(room.id), class: "nav-link" %>
                             </td>
                             <td>
-                              <%= link_to "Delete", room_path(room.id), method: :delete, data: { confirm: "Are you sure?" }, class: "nav-link" %>
+                              <%= link_to "Remove", room_path(room.id),  data: { turbo_method: :delete , turbo_confirm: "Are you sure?" }, class: "nav-link" %>
                             </td>
                           </tr>
                         <% elsif (room.created_for == current_user.id) %>
@@ -45,7 +50,7 @@
                               <%= link_to "#{User.find(room.created_by).name}", room_path(room.id), class: "nav-link" %>
                             </td>
                             <td>
-                              <%= link_to "Delete", room_path(room.id), method: :delete, data: { confirm: "Are you sure?" }, class: "nav-link" %>
+                              <%= link_to "Remove", room_path(room.id),  data: { turbo_method: :delete ,  turbo_confirm: "Are you sure?" }, class: "nav-link" %>
                             </td>
                           </tr>
                         <% end %>

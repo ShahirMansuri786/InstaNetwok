@@ -12,13 +12,8 @@
   <% end %>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name , class:"form-controller" %>
     <%= form.hidden_field :created_by , value: current_user.id %>
-    <%= form.select :created_for, options_from_collection_for_select(User.all, :id, :name), { include_blank: 'Select Friend' }, { class: "form-controller" } %>
-  </div>
-
-  <div>
-    <%= form.submit "AddRoom" %>
+    <%= form.select :created_for, options_from_collection_for_select(User.all, :id, :name), { include_blank: 'Select Friend' }, { class: "form-controller btn btn-outline-success btn-sm mt-2" } %>
+    <%= form.submit "AddFriend" , class: "btn btn-outline-success btn-sm mt-2" %>
   </div>
 <% end %>

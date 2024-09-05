@@ -9,6 +9,6 @@ class User < ApplicationRecord
   has_one :user_profile
   has_many :following  , foreign_key: "follower_id", class_name: "Relationship"
   has_many :followers  , foreign_key: "followed_id", class_name: "Relationship"
-
   has_many :messages
+  validates :name , :user_name , presence: true
 end
