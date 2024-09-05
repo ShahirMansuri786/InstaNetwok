@@ -10,8 +10,10 @@ class UsersController < ApplicationController
   def show_user
     @user = User.find(params[:id])
     @user_post = Post.where(user_id: @user.id)
-    @user_following = Relationship.where(followed_id:@user.id)
-    @user_follower = Relationship.where(follower_id:@user.id)
+    @user_following = Relationship.where(follower_id:@user.id)
+    @user_follower = Relationship.where(followed_id:@user.id)
+    @relation_id = @user.followers.find_by(follower: current_user).id if @user.followers.find_by(follower: current_user).present?
+    @user_profile_image = UserProfile.find_by(user_id: @user.id).profile_image if UserProfile.find_by(user_id: @user.id).profile_image.attached?
   end
 
   def user_update

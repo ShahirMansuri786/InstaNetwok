@@ -11,10 +11,10 @@
   <body>
   <div class="user_profile bg-white">
     <div class="p-3 d-flex">
-      <%= image_tag url_for(UserProfile.find_by(user_id: @user.id).profile_image) ,style:"width:100px; height:100px ; border-radius:180px " if UserProfile.find_by(user_id: @user.id).profile_image.attached? %> 
+      <%= image_tag url_for(@user_profile_image) ,style:"width:100px; height:100px ; border-radius:180px " if @user_profile_image %> 
       <div class="ms-3">
         <%= button_to "Follow", user_relationships_path(@user), method: :post, class: "btn btn-primary", form: { data: { turbo: false } } unless @user.followers.find_by(follower: current_user).present? %>
-        <%= button_to "Unfollow" , relationship_path(@user.followers.find_by(follower: current_user).id) , method: :delete , class:"btn btn-primary" if @user.followers.find_by(follower: current_user).present? %>
+        <%= button_to "Unfollow" , relationship_path(@relation_id) , method: :delete , class:"btn btn-primary"  if @relation_id %>
       </div> 
     </div>
     <table class="table">
@@ -30,8 +30,8 @@
         <tr>
           <td><%= @user.name %></td>
           <td><%= @user.user_name %></td>
-          <td><%= @user.following.count %>  </td>
           <td><%= @user.followers.count %>  </td>
+          <td><%= @user.following.count %>  </td>
         </tr>
       </tbody>
     </table>
