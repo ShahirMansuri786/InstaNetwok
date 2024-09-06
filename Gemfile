@@ -58,6 +58,8 @@ group :development, :test do
   # gem 'factory_bot_rails'
   # gem 'faker'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
+
   # gem 'rails-controller-testing'
 end
 
@@ -70,4 +72,5 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "simplecov", '0.17.0'
 end
