@@ -9,7 +9,7 @@
       <tbody>
         <% user_following.each do |user| %>
           <tr>
-            <td><%= User.find(Relationship.find(user.id).follower_id).name %></td>
+            <td><%= User.new.all_followed(user.id) %></td>
           </tr>
         <% end %>
       </tbody>
