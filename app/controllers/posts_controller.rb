@@ -13,10 +13,10 @@ class PostsController < ApplicationController
 
   def create
     if user_signed_in?
-      @post = current_user.posts.new(post_params)
-      @post.post_images.attach(params[:post][:post_images])
-      if @post.save!
-        redirect_to @post
+      post = current_user.posts.new(post_params)
+      post.post_images.attach(params[:post][:post_images])
+      if post.save!
+        redirect_to post
       else
         render :new, notice: "Image succesfully created"
       end
@@ -27,8 +27,8 @@ class PostsController < ApplicationController
 
   def destroy
     if user_signed_in?
-      @post = Post.find(params[:id])
-      @post.destroy
+      post = Post.find(params[:id])
+      post.destroy
       redirect_to posts_path
     else
       redirect_to user_session_path
@@ -36,6 +36,7 @@ class PostsController < ApplicationController
   end
 
   private
+  
   def post_params
     params.require(:post).permit(:post_images, :caption, :user_id)
   end

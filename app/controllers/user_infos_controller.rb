@@ -11,26 +11,23 @@ class UserInfosController < ApplicationController
 
   def new
     if user_signed_in?
-    @user_info = UserInfo.new
-  else
-    redirect_to user_session_path
-  end
+      @user_info = UserInfo.new
+    else
+      redirect_to user_session_path
+    end
   end
 
   def edit
     @user_info = UserInfo.find(params[:id])
   end
 
-
-  
   def create
     if user_signed_in?
-      @user_info = current_user.create_user_info(user_info_params)
-    
-      if @user_info
-        redirect_to user_registration_path       
+      user_info = current_user.create_user_info(user_info_params)
+      if user_info
+        redirect_to posts_path       
       else
-      render :new
+        render :new
       end
     else 
       redirect_to user_session_path
@@ -47,7 +44,7 @@ class UserInfosController < ApplicationController
 
   def destroy
     if user_signed_in?
-      @user_info = UserInfo.find(params[:id])
+      # @user_info = UserInfo.find(params[:id])
       @user_info.destroy
       redirect_to user_infos_path
     else
@@ -56,6 +53,7 @@ class UserInfosController < ApplicationController
   end
 
   private
+
   def set_user_info
     @user_info = UserInfo.find(params[:id])
   end
