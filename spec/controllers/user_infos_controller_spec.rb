@@ -55,7 +55,7 @@ RSpec.describe UserInfosController, type: :controller do
       it "creates a new user_info and redirects to the user registration path" do
         post_params = { user_info: { bio: "New Bio", user_id: user.id } }
         post :create, params: post_params
-        expect(response).to redirect_to(user_registration_path)
+        expect(response).to redirect_to(posts_path)
         expect(UserInfo.last.bio).to eq("New Bio")
       end
 

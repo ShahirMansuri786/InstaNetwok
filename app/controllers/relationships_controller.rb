@@ -7,7 +7,7 @@ class RelationshipsController < ApplicationController
         redirect_to posts_path
       end
     else
-    redirect_to user_session_path
+      redirect_to user_session_path
     end
   end
 

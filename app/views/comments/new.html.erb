@@ -1,33 +1,29 @@
 <html >
   <head>
-  
-     <style>
-     .con:hover{
-      box-shadow: 10px 10px 20px 10px grey ;}
+    <style>
+      .con:hover{
+        box-shadow: 10px 10px 20px 10px grey ;}
 
       .con{
         position:relative;
         left:220px;
         top:60px;
       }
-     </style> 
+    </style> 
   </head>
 
   <body>
-
-  <div class="con" , style="height:250px; width:860px;  border-radius:10px ;" >
-  <div style="margin-left:92.5% ; margin-bottom:15px"><%= link_to 'Back', posts_path, class:"btn btn-outline-success" %></div>
-    <div class="container"> 
-      <%= form_with(url: post_comments_path(@post)) do |form| %>
-      <%= form.text_area :comment_text, placeholder: "Enter your comment here" ,class:"form-control" %>
-      <%= form.hidden_field :user_id , value:current_user.id %>
-      <%= form.submit "create comment", class:"btn btn-outline-success mt-3 " %>
-  <% end %>
-   </div>
-</div> 
-
+    <div class="con" , style="height:250px; width:860px;  border-radius:10px ;" >
+      <div style="margin-left:92.5% ; margin-bottom:15px">
+        <%= link_to 'Back', posts_path, class:"btn btn-outline-success" %>
+      </div>
+      <div class="container"> 
+        <%= form_with(url: post_comments_path(@post)) do |form| %>
+        <%= form.text_area :comment_text, placeholder: "Enter your comment here" ,class:"form-control" %>
+        <%= form.hidden_field :user_id , value:current_user.id %>
+        <%= form.submit "create comment", class:"btn btn-outline-success mt-3 " %>
+        <% end %>
+      </div>
+    </div> 
   </body>
-
 </html>
-
-
