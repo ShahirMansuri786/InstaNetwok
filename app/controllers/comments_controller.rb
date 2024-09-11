@@ -16,12 +16,12 @@ class CommentsController < ApplicationController
 
   def create
     if user_signed_in?
-      @post_comment = @post.comments.new(comment_params)
-        if @post_comment.save!
-          redirect_to @post
-        else
-          render :new, notice: "Image succesfully created"
-        end
+      post_comment = @post.comments.new(comment_params)
+      if post_comment.save!
+        redirect_to @post
+      else
+        render :new, notice: "Image succesfully created"
+      end
     else
       redirect_to user_session_path
     end
@@ -29,8 +29,8 @@ class CommentsController < ApplicationController
   
   def destroy
     if user_signed_in?
-      @comment = Comment.find(params[:id])
-      @comment.destroy
+      comment = Comment.find(params[:id])
+      comment.destroy
       redirect_to post_path(params[:post_id])
     else
       redirect_to user_session_path
@@ -38,10 +38,11 @@ class CommentsController < ApplicationController
   end
 
   private
-    def comment_params
-      params.permit(:comment_text , :user_id )
-    end
-  
+
+  def comment_params
+    params.permit(:comment_text , :user_id )
+  end
+
   def find_post
     @post = Post.find(params[:post_id] ) 
   end     
