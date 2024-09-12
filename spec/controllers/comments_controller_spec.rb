@@ -5,22 +5,27 @@ RSpec.describe CommentsController, type: :controller do
 	let(:user) { FactoryBot.create(:user) }
 	# let(:post) { FactoryBot.create (:post , caption: "Nice picture" , post_images: [], user_id: user.id ) }
 
-	describe 'GET #index' do
-		it 'assigns all comments to @comments' do
+	before do
+    sign_in user
+  end
+
+	describe 'CommentsController#index' do
+		it 'assigns all comments to @post_comments' do
 			comment1 = FactoryBot.create(:comment )
 			comment2 = FactoryBot.create(:comment )
-			get :index
-			expect(assigns(:post_comments)).to match_array([comment])
+			# get :index
+			expect(assigns(:post_comments)).to match_array([comment1 , comment2])
 			expect(response).to have_http_status(:success)
 		end
   end
 
-	describe "GET #new" do
+	describe "CommentsController#new" do
 		it "returns a new instance for new comment" do
 			comment = FactoryBot.create(:comment , post: post)
-			get :new
+			get new_post_comment_path(post)
+			expect(assigns(:post_comment)).to be_a_new(Comment)
 			expect(response).to have_http_status(:success)
-			expect(assigns(:comment)).to be_a_new(Comment)
+			
 		end
 	end
 
