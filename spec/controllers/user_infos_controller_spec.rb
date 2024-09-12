@@ -81,7 +81,6 @@ RSpec.describe UserInfosController, type: :controller do
       it "updates the user_info and redirects back" do
         patch :update, params: { id: user_info.id, user_info: { bio: "Updated Bio" } }
         user_info.reload
-        # expect(response).to redirect_back(fallback_location: root_path)
         expect(user_info.bio).to eq("Updated Bio")
       end
     end
@@ -106,7 +105,6 @@ RSpec.describe UserInfosController, type: :controller do
 
     context "when not signed in" do
       before { sign_out user }
-
       it "redirects to the sign-in page" do
         delete :destroy, params: { id: user_info.id }
         expect(response).to redirect_to(user_session_path)

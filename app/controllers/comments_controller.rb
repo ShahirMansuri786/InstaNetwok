@@ -5,11 +5,11 @@ class CommentsController < ApplicationController
   def index
     @post_comments = @post.comments.all
   end
-      
+
   def new
     @post_comment = @post.comments.new()
   end
-      
+
   def show
     @post_comment = @post.comments.find(params[:id])
   end
@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
       redirect_to user_session_path
     end
   end
-  
+
   def destroy
     if user_signed_in?
       comment = Comment.find(params[:id])

@@ -3,4 +3,4 @@ FactoryBot.define do
     association :post 
     comment_text {Faker::Lorem.sentence} 
   end
-end 
+end
