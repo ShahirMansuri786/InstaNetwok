@@ -16,6 +16,7 @@ class PostsController < ApplicationController
       post = current_user.posts.new(post_params)
       post.post_images.attach(params[:post][:post_images])
       if post.save!
+        PostConfirmationMailer.with(user: current_user).post_confirmation_mailer.deliver_later
         redirect_to post
       else
         render :new, notice: "Image succesfully created"
