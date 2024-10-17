@@ -18,6 +18,7 @@ services:
           name: insta_network
           property: connectionString
       - key: RAILS_MASTER_KEY
+        value: 1dd42d373e2803bfde5e84c103479775
         sync: false
       - key: WEB_CONCURRENCY
         value: 2 # sensible default
