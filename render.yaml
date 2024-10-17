@@ -11,16 +11,14 @@ services:
     plan: free
     buildCommand: "./bin/render-build.sh"
     # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
-    startCommand: "RAILS_ENV=production bundle exec rails server"
+    startCommand: "bundle exec rails server"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
           name: insta_network
           property: connectionString
       - key: RAILS_MASTER_KEY
-        value: 1dd42d373e2803bfde5e84c103479775
         sync: false
       - key: WEB_CONCURRENCY
         value: 2 # sensible default
-      - key: SECRET_KEY_BASE
-        value: 28e1bc7d7e4a00e11d8914abdb2384c9026f30b2db22e83d2922c8fc54e9f1ceef8d6ed3fbf630433d4a256c018dd3bacd97d13ac72dff9980db5d8eb5551ac8
+     
