@@ -24,6 +24,6 @@ test:
   <<: *default
   database: insta_network
 
-# production:
-#   <<: *default
-#   database: storage/production.sqlite3
+production:
+  <<: *default
+  database: insta_network

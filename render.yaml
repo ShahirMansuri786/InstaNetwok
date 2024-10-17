@@ -21,3 +21,5 @@ services:
         sync: false
       - key: WEB_CONCURRENCY
         value: 2 # sensible default
+      - key: SECRET_KEY_BASE
+        value: 28e1bc7d7e4a00e11d8914abdb2384c9026f30b2db22e83d2922c8fc54e9f1ceef8d6ed3fbf630433d4a256c018dd3bacd97d13ac72dff9980db5d8eb5551ac8
